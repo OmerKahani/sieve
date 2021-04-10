@@ -21,6 +21,7 @@ github_link = {
     "rabbitmq-operator": "git@github.com:rabbitmq/cluster-operator.git",
     "kafka-operator": "git@github.com:banzaicloud/kafka-operator.git",
     "mongodb-operator": "git@github.com:percona/percona-server-mongodb-operator.git",
+    "istio-operator": "git@github.com:banzaicloud/istio-operator.git"
 }
 
 app_dir = {
@@ -29,6 +30,7 @@ app_dir = {
     "rabbitmq-operator": "app/rabbitmq-operator",
     "kafka-operator": "app/kafka-operator",
     "mongodb-operator": "app/mongodb-operator",
+    "istio-operator": "app/istio-operator.git"
 }
 
 test_dir = {
@@ -37,6 +39,7 @@ test_dir = {
     "rabbitmq-operator": "test-rabbitmq-operator/test",
     "kafka-operator": "test-kafka-operator/test",
     "mongodb-operator": "test-mongodb-operator/test",
+    "istio-operator": "test-istio-operator/test",
 }
 
 test_suites = {
@@ -70,6 +73,12 @@ test_suites = {
         "test1": Suite(
             "recreateMongodbCluster.sh", "test-mongodb-operator/test/time-travel-1.yaml", "time-travel"),
     },
+    "istio-operator": {
+       "test1": Suite(
+            "recreateIstioCluster.sh", "test-istio-operator/test/time-travel-1.yaml", "time-travel"), 
+        "test2": Suite(
+            "resizeIstioCluster.sh", "test-istio-operator/test/time-travel-2.yaml", "time-travel"), 
+    }
 }
 
 CRDs = {
@@ -78,6 +87,7 @@ CRDs = {
     "rabbitmq-operator": ["rabbitmqcluster"],
     "kafka-operator": ["kafkacluster", "kafkatopic", "kafkauser"],
     "mongodb-operator": ["perconaservermongodb", "perconaservermongodbbackup", "perconaservermongodbrestore"],
+    "istio-operator": ["istio", "meshgateway", "remoteistio"]
 }
 
 command = {
@@ -86,6 +96,7 @@ command = {
     "rabbitmq-operator": "/manager",
     "kafka-operator": "/manager",
     "mongodb-operator": "percona-server-mongodb-operator",
+    "istio-operator": "/manager"
 }
 
 controller_runtime_version = {
@@ -94,6 +105,7 @@ controller_runtime_version = {
     "rabbitmq-operator": "v0.8.3",
     "kafka-operator": "v0.6.5",
     "mongodb-operator": "v0.5.2",
+    "istio-operator": "v0.6.2"
 }
 
 client_go_version = {
@@ -102,6 +114,7 @@ client_go_version = {
     "rabbitmq-operator": "v0.20.2",
     "kafka-operator": "v0.18.9",
     "mongodb-operator": "v0.17.2",
+    "istio-operator": "v0.18.6"
 }
 
 sha = {
@@ -110,6 +123,7 @@ sha = {
     "rabbitmq-operator": "4f13b9a942ad34fece0171d2174aa0264b10e947",
     "kafka-operator": "60caff461c5372e5fdb8e117f83fa1b6b4a9e53b",
     "mongodb-operator": "c12b69e2c41efc67336a890039394250420f60bb",
+    "istio-operator": "f68577595e044dbffba7f67dde834bd7cff7f6ea"
 }
 
 docker_file = {
@@ -118,6 +132,7 @@ docker_file = {
     "rabbitmq-operator": "Dockerfile",
     "kafka-operator": "Dockerfile",
     "mongodb-operator": "build/Dockerfile",
+    "istio-operator": "Dockerfile.dev"
 }
 
 learning_configs = {
@@ -126,6 +141,7 @@ learning_configs = {
     "rabbitmq-operator": "test-rabbitmq-operator/test/learn.yaml",
     "kafka-operator": "test-kafka-operator/test/learn.yaml",
     "mongodb-operator": "test-mongodb-operator/test/learn.yaml",
+    "istio-operator": "test-istio-operator/test/learn.yaml"
 }
 
 
@@ -198,6 +214,14 @@ def mongodb_operator_deploy(dr, dt):
     os.system("kubectl apply -f %s" % new_path)
     os.system("rm %s" % new_path)
 
+def istio_operator_deploy(dr, dt):
+    org_dir = os.getcwd()
+    os.system("mv app/istio-operator/config app/istio-operator/config-original")
+    os.system("cp -r test-istio-operator/deploy/config app/istio-operator/config")
+    os.chdir(os.path.join("app", "istio-operator"))
+    os.system("make deploy IMG=%s/istio-operator:%s" % (dr, dt))
+    os.chdir(org_dir)
+    time.sleep(60)
 
 deploy = {
     "cassandra-operator": cassandra_operator_deploy,
@@ -205,4 +229,5 @@ deploy = {
     "rabbitmq-operator": rabbitmq_operator_deploy,
     "kafka-operator": kafka_operator_deploy,
     "mongodb-operator": mongodb_operator_deploy,
+    "istio-operator": istio_operator_deploy
 }

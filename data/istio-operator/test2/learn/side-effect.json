@@ -7,14 +7,13 @@
     },
     "configmap": {
         "create": 2,
-        "update": 3
+        "update": 8
     },
     "customresourcedefinition": {
         "create": 11
     },
     "deployment": {
-        "create": 3,
-        "update": 1
+        "create": 3
     },
     "horizontalpodautoscaler": {
         "create": 1,
@@ -25,7 +24,8 @@
     },
     "meshgateway": {
         "create": 2,
-        "update": 2
+        "delete": 1,
+        "update": 1
     },
     "mutatingwebhookconfiguration": {
         "create": 1

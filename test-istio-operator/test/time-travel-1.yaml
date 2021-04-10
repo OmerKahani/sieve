@@ -1,0 +1,25 @@
+project: istio-operator
+mode: time-travel
+straggler: kind-control-plane3
+front-runner: kind-control-plane
+operator-pod: istio-operator
+command: /manager
+timing: after
+ce-name: istio-ingressgateway-sonar-istio-cluster
+ce-namespace: default
+ce-rtype: meshgateway
+ce-diff-current: '{"status": {"Status": "Reconciling"}}'
+ce-diff-previous: '{"status": {"Status": "ReconcileFailed", "ErrorMessage": "ingress
+  gateway endpoint address is pending"}}'
+ce-etype-current: Updated
+ce-etype-previous: Updated
+se-name: istio-ingressgateway-sonar-istio-cluster
+se-namespace: default
+se-rtype: meshgateway
+se-etype: ADDED
+description: 'Pause kind-control-plane3 after it processes a default/meshgateway/istio-ingressgateway-sonar-istio-cluster
+  event E. E should match the pattern {"status": {"Status": "Reconciling"}} and the
+  events before E should match {"status": {"Status": "ReconcileFailed", "ErrorMessage":
+  "ingress gateway endpoint address is pending"}}. And restart the controller istio-operator
+  after kind-control-plane processes a ADDED default/meshgateway/istio-ingressgateway-sonar-istio-cluster
+  event.'
