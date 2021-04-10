@@ -1,0 +1,18 @@
+{
+    "deployment": {
+        "size": 3,
+        "terminating": 0
+    },
+    "persistentvolumeclaim": {
+        "size": 0,
+        "terminating": 0
+    },
+    "pod": {
+        "size": 12,
+        "terminating": 0
+    },
+    "statefulset": {
+        "size": 1,
+        "terminating": 0
+    }
+}

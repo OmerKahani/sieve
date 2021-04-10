@@ -1,0 +1,8 @@
+# Adds namespace to all resources.
+namespace: default
+
+resources:
+- rbac/role.yaml
+- rbac/role_binding.yaml
+- manager/manager.yaml
+- webhook/webhook.yaml

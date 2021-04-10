@@ -1,0 +1,45 @@
+{
+    "clusterrole": {
+        "create": 4
+    },
+    "clusterrolebinding": {
+        "create": 4
+    },
+    "configmap": {
+        "create": 4,
+        "update": 1
+    },
+    "customresourcedefinition": {
+        "create": 11
+    },
+    "deployment": {
+        "create": 2
+    },
+    "horizontalpodautoscaler": {
+        "create": 2
+    },
+    "istio": {
+        "update": 3
+    },
+    "mutatingwebhookconfiguration": {
+        "create": 2
+    },
+    "poddisruptionbudget": {
+        "create": 2
+    },
+    "role": {
+        "create": 2
+    },
+    "rolebinding": {
+        "create": 2
+    },
+    "service": {
+        "create": 2
+    },
+    "serviceaccount": {
+        "create": 4
+    },
+    "validatingwebhookconfiguration": {
+        "create": 2
+    }
+}

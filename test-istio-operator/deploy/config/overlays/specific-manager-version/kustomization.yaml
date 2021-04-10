@@ -1,0 +1,8 @@
+bases:
+- ../basic
+
+# Adds namespace to all resources.
+namespace: default
+
+patches:
+- manager_image_patch.yaml

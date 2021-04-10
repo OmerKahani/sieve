@@ -1,0 +1,5 @@
+mode: learn
+crds:
+  - istio
+  - meshgateway
+  - remoteistio

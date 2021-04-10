@@ -1,0 +1,30 @@
+apiVersion: istio.banzaicloud.io/v1beta1
+kind: Istio
+metadata:
+  labels:
+    controller-tools.k8s.io: "1.0"
+  name: istio-sample-v19x
+spec:
+  version: "1.9.2"
+  global: false
+  meshPolicy:
+    mtlsMode: PERMISSIVE
+  gateways:
+    ingress:
+      runAsRoot: false
+  sidecarInjector:
+    initCNIConfiguration:
+      enabled: true
+      chained: true
+      repair:
+        enabled: true
+        hub: ""
+        tag: ""
+        labelPods: true
+        deletePods: true
+        initContainerName: "istio-validation"
+        brokenPodLabelKey: "cni.istio.io/uninitialized"
+        brokenPodLabelValue: "true"
+  proxy:
+    image: "docker.io/istio/proxyv2:1.9.2"
+  jwtPolicy: "first-party-jwt"
