@@ -88,7 +88,7 @@ def parseCacheRead(line):
 def parseEventIDOnly(line):
     assert SONAR_EVENT_APPLIED_MARK in line or SONAR_EVENT_MARK in line
     if SONAR_EVENT_APPLIED_MARK in line:
-        tokens = line[line.find(SONAR_EVENT_APPLIED_MARK)                      :].strip("\n").split("\t")
+        tokens = line[line.find(SONAR_EVENT_APPLIED_MARK):].strip("\n").split("\t")
         return EventIDOnly(tokens[1])
     else:
         tokens = line[line.find(SONAR_EVENT_MARK):].strip("\n").split("\t")
@@ -290,8 +290,8 @@ def generate_triggering_points(event_map, causality_pairs):
                                 "effect": side_effect.__dict__}
             if prev_event is None:
                 triggering_point["ttype"] = "todo"
-            elif prev_event.etype != cur_event.etype:
-                triggering_point["ttype"] = "todo"
+            # elif prev_event.etype != cur_event.etype:
+            #     triggering_point["ttype"] = "todo"
             else:
                 slim_prev_obj, slim_cur_obj = diffEvents(
                     prev_event, cur_event)
@@ -355,8 +355,8 @@ def generateTimaTravelYaml(triggeringPoints, path, project, timing="after"):
 
 def generateDigest(path):
     side_effect = {}
-    status_empty_entry = {"create": 0, "update": 0,
-                          "delete": 0, "patch": 0, "deleteallof": 0}
+    side_effect_empty_entry = {"create": 0, "update": 0,
+                               "delete": 0, "patch": 0, "deleteallof": 0}
     for line in open(path).readlines():
         if SONAR_SIDE_EFFECT_MARK not in line:
             continue
@@ -368,7 +368,7 @@ def generateDigest(path):
             if tokens[5] == "NotFound":
                 continue
         if rType not in side_effect:
-            side_effect[rType] = status_empty_entry
+            side_effect[rType] = copy.deepcopy(side_effect_empty_entry)
         side_effect[rType][effectType] += 1
 
     status = {}
