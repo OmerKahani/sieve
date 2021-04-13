@@ -81,6 +81,8 @@ def run_test(project, mode, test_script, server_config, controller_config, apise
             break
         time.sleep(1)
 
+    exit(0)
+
     for apiserver in apiserver_list:
         os.system("kubectl cp %s %s:/sonar.yaml -n kube-system" %
                   (apiserver_config, apiserver))

@@ -39,9 +39,9 @@ spec:
         memory: 2048Mi
     certProvider: "istiod"
   gateways:
-    enabled: true
+    enabled: false
     ingress:
-      enabled: true
+      enabled: false
       replicaCount: 1
       minReplicas: 1
       maxReplicas: 1
@@ -72,7 +72,7 @@ spec:
           cpu: 2000m
           memory: 1024Mi
     egress:
-      enabled: true
+      enabled: false
       replicaCount: 1
       minReplicas: 1
       maxReplicas: 1
