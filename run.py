@@ -81,8 +81,6 @@ def run_test(project, mode, test_script, server_config, controller_config, apise
             break
         time.sleep(1)
 
-    exit(0)
-
     for apiserver in apiserver_list:
         os.system("kubectl cp %s %s:/sonar.yaml -n kube-system" %
                   (apiserver_config, apiserver))
@@ -114,8 +112,6 @@ def run_test(project, mode, test_script, server_config, controller_config, apise
     os.system("kubectl exec %s %s -- /bin/bash -c \"KUBERNETES_SERVICE_HOST=kind-control-plane KUBERNETES_SERVICE_PORT=6443 %s &> operator.log &\"" %
               (container_flag, pod_name, controllers.command[project]))
     
-    # TODO: manager starting may not be that immediate, we may need a better notify strategy here
-    time.sleep(60)
 
     org_dir = os.getcwd()
     os.chdir(controllers.test_dir[project])

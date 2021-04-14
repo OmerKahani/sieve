@@ -8,10 +8,7 @@ ORIGINAL_DIR = os.getcwd()
 def download_kubernetes():
     os.system("rm -rf fakegopath")
     os.system("mkdir -p fakegopath/src/k8s.io")
-    # os.system("git clone --single-branch --branch v1.18.9 git@github.com:kubernetes/kubernetes.git fakegopath/src/k8s.io/kubernetes >> /dev/null")
-    os.system("git clone --single-branch --branch v1.18.9 https://gitee.com/mirrors/Kubernetes.git fakegopath/src/k8s.io/kubernetes >> /dev/null")
-    # We try to get from local_copy instead
-    # os.system("cp -r local_copy/kubernetes fakegopath/src/k8s.io/kubernetes >> /dev/null")
+    os.system("git clone --single-branch --branch v1.18.9 git@github.com:kubernetes/kubernetes.git fakegopath/src/k8s.io/kubernetes >> /dev/null")
     os.chdir("fakegopath/src/k8s.io/kubernetes")
     os.system("git checkout -b sonar >> /dev/null")
     os.chdir(ORIGINAL_DIR)
@@ -33,7 +30,6 @@ def instrument_kubernetes(mode):
     os.system(
         "./instrumentation kubernetes %s %s/fakegopath/src/k8s.io/kubernetes" % (mode, ORIGINAL_DIR))
     os.chdir(ORIGINAL_DIR)
-    # exit(0)
 
 
 def build_kubernetes(img_repo, img_tag):
