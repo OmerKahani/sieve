@@ -17,7 +17,7 @@ Time-travel bugs happen when the controller reads stale cluster status from a st
 
 3. The controller restarts after experiencing a node failure and connects to apiserver2. The controller reads stale `S1` and perform reconciliation accordingly. The reconciliation triggered by reading `S1` may lead to some unexpected behavior and cause failures like data loss or service unavailability.
 
-We will use [a real-world example](https://github.com/rabbitmq/cluster-operator/issues/648), a time-travel bug from [rabbitmq-operator](https://github.com/rabbitmq/cluster-operator) found by us, to show the end-to-end experience of using Sonar to test controllers.
+We will use [a time-travel bug](https://github.com/rabbitmq/cluster-operator/issues/648) in [rabbitmq-operator](https://github.com/rabbitmq/cluster-operator) found by Sonar to show the end-to-end experience of testing the controller using Sonar.
 
 ### Prerequisite
 **Kind cluster is required**. Sonar tests the controller in a kind cluster.
