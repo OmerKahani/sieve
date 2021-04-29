@@ -8,16 +8,14 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    env:
+      GOPATH: /home/runner/go
     steps:
       - uses: actions/checkout@v2
       - name: Setup Go environment
         uses: actions/setup-go@v2.1.3
         with:
           go-version: 1.15
-      - name: Set up GOPATH
-        run: |
-          echo "##[set-env name=GOPATH;]$(go env GOPATH)"
       - name: Setup Python
         uses: actions/setup-python@v2.2.2
         with:
