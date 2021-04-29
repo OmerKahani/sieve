@@ -24,7 +24,7 @@ github_link = {
     "rabbitmq-operator": "git@github.com:rabbitmq/cluster-operator.git",
     "mongodb-operator": "git@github.com:percona/percona-server-mongodb-operator.git",
     "cass-operator": "git@github.com:datastax/cass-operator.git",
-    "casskop-operator": "git@github.com:Orange-OpenSource/casskop.git",
+    "casskop-operator": "https://github.com/Orange-OpenSource/casskop.git",
 }
 
 app_dir = {
