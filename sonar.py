@@ -58,9 +58,12 @@ def setup_cluster(project, mode, test_script, test_config, log_dir, docker_repo,
     while True:
         created = core_v1.list_namespaced_pod(
             "kube-system", watch=False, label_selector="component=kube-apiserver").items
+        print("created kube-apiserver: ", created)
         if len(created) == len(apiserver_list) and len(created) == len([item for item in created if item.status.phase == "Running"]):
             break
         time.sleep(1)
+    
+    print("All kube-apiservers are successfully created")
 
     for apiserver in apiserver_list:
         os.system("kubectl cp %s %s:/sonar.yaml -n kube-system" %
@@ -71,8 +74,11 @@ def setup_cluster(project, mode, test_script, test_config, log_dir, docker_repo,
     # Wait for project pod ready
     w = kubernetes.watch.Watch()
     for event in w.stream(core_v1.list_namespaced_pod, namespace="default", label_selector="sonartag="+project):
+        print("we get event for operator pod: ", event)
         if event['object'].status.phase == "Running":
             w.stop()
+
+    print("Operator pod is ready")
 
     api1_addr = "https://" + core_v1.list_node(
         watch=False, label_selector="kubernetes.io/hostname=kind-control-plane").items[0].status.addresses[0].address + ":6443"
