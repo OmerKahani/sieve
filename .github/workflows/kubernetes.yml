@@ -1,6 +1,17 @@
 name: Kubernetes
 
-on: [workflow_dispatch]
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: 'Person to greet'
+        required: true
+        default: 'Mona the Octocat'
+      home:
+        description: 'location'
+        required: false
+        default: 'The Octoverse'
+
 
 env:
   IMAGE_NAMESPACE: docker.pkg.github.com/xlab-uiuc/sonar
