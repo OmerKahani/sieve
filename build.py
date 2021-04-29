@@ -38,6 +38,7 @@ def build_kubernetes(img_repo, img_tag):
         "GOPATH=%s/fakegopath KUBE_GIT_VERSION=v1.18.9-sonar-`git rev-parse HEAD` kind build node-image" % ORIGINAL_DIR)
     os.chdir(ORIGINAL_DIR)
     os.system("docker build --no-cache -t %s/node:%s ." % (img_repo, img_tag))
+    os.system("docker push %s/node:%s" % (img_repo, img_tag))
 
 
 def setup_kubernetes(mode, img_repo, img_tag):
