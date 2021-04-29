@@ -62,3 +62,7 @@ jobs:
       - name: Sonar Learn
         run: |
           python3 sonar.py -p casskop-operator -t test1 -m learn -d $IMAGE_NAMESPACE
+      - uses: actions/upload-artifact@v2
+        with:
+          name: sonar-learn-artifact
+          path: log
