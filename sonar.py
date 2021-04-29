@@ -192,7 +192,7 @@ def run_batch(project, test, dir, mode, docker):
 
 if __name__ == "__main__":
     s = time.time()
-    usage = "usage: python3 run.py [options]"
+    usage = "usage: python3 sonar.py [options]"
     parser = optparse.OptionParser(usage=usage)
     parser.add_option("-p", "--project", dest="project",
                       help="specify PROJECT to test: cassandra-operator or zookeeper-operator", metavar="PROJECT", default="cassandra-operator")

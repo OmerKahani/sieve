@@ -56,4 +56,4 @@ jobs:
           kind
       - name: Sonar Learn
         run: |
-          python3 run.py -p casskop-operator -t test1 -m learn -d $IMAGE_NAMESPACE
+          python3 sonar.py -p casskop-operator -t test1 -m learn -d $IMAGE_NAMESPACE
