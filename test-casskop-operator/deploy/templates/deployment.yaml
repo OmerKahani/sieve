@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "cassandra-operator.fullname" . }}
+  name: casskop-operator
   labels:
     app: {{ template "cassandra-operator.name" . }}
     chart: {{ .Chart.Name }}-{{ .Chart.Version }}
@@ -38,8 +38,8 @@ spec:
       - name: {{ template "cassandra-operator.name" . }}
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: "{{ .Values.image.pullPolicy }}"
-        # command:
-        # - casskop
+        command:
+        - casskop
         # readinessProbe:
         #   exec:
         #     command:

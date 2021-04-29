@@ -30,6 +30,7 @@ jobs:
         run: |
           python3 build.py -p casskop-operator -m learn -d $IMAGE_NAMESPACE
   learn:
+    needs: build
     runs-on: ubuntu-latest
     env:
       GOPATH: /home/runner/go
@@ -54,6 +55,10 @@ jobs:
         run: |
           go get sigs.k8s.io/kind
           kind
+      - name: Install Helm
+        run: |
+          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+          helm
       - name: Sonar Learn
         run: |
           python3 sonar.py -p casskop-operator -t test1 -m learn -d $IMAGE_NAMESPACE

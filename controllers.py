@@ -98,6 +98,7 @@ deployment_name = {
     "zookeeper-operator": "zookeeper-operator",
     "rabbitmq-operator": "rabbitmq-operator",
     "mongodb-operator": "percona-server-mongodb-operator",
+    "casskop-operator": "casskop-operator",
 }
 
 operator_pod_label = {
@@ -105,6 +106,7 @@ operator_pod_label = {
     "zookeeper-operator": "zookeeper-operator",
     "rabbitmq-operator": "rabbitmq-operator",
     "mongodb-operator": "mongodb-operator",
+    "casskop-operator": "casskop-operator",
 }
 
 # command = {
