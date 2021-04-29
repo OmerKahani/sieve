@@ -22,6 +22,10 @@ jobs:
           python-version: 3.7
       - name: Setup GitHub Package Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u "${{ github.actor }}" --password-stdin
+      - name: Install Python Packages
+        run: |
+          pip install kubernetes
+          pip install pyyaml
       - name: Build Image
         run: |
           python3 build.py -p kubernetes -m learn -d $IMAGE_NAMESPACE
