@@ -1,6 +1,7 @@
 import os
 import kubernetes
 import time
+import re
 
 
 class Suite:
@@ -163,6 +164,8 @@ docker_file = {
 #     "casskop-operator": "test-casskop-operator/test/learn.yaml",
 # }
 
+def make_safe_filename(filename):
+    return re.sub(r'[^\w\d-]','_', filename)
 
 def replace_docker_repo(path, dr, dt):
     fin = open(path)
@@ -171,7 +174,7 @@ def replace_docker_repo(path, dr, dt):
     data = data.replace("${SONAR-DT}", dt)
     fin.close()
     tokens = path.rsplit('.', 1)
-    new_path = tokens[0] + "-" + dr + '.' + tokens[1]
+    new_path = tokens[0] + "-" + make_safe_filename(dr) + '.' + tokens[1]
     fin = open(new_path, "w")
     fin.write(data)
     fin.close()
