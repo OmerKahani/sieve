@@ -3,7 +3,7 @@ name: Docker
 on: [push]
 
 env:
-  IMAGE_NAMESPACE: test
+  IMAGE_NAMESPACE: docker.pkg.github.com/xlab-uiuc/sonar
 
 jobs:
   build:
@@ -16,6 +16,8 @@ jobs:
         uses: actions/setup-go@v2.1.3
         with:
           go-version: 1.15
+      - name: Setup GitHub Package Registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u "${{ github.actor }}" --password-stdin
       - name: Setup Python
         uses: actions/setup-python@v2.2.2
         with:
@@ -30,8 +32,6 @@ jobs:
           kind
       - name: Build Image
         run: |
-          env
-          go env
           python3 build.py -p casskop-operator -m learn -d $IMAGE_NAMESPACE
 
 
