@@ -34,6 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GOPATH: /home/runner/go
+      KUBECONFIG: /home/runner/.kube/config
     steps:
       - uses: actions/checkout@v2
       - name: Setup Go environment
