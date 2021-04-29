@@ -29,6 +29,8 @@ jobs:
           kind
       - name: Build Image
         run: |
+          env
+          go env
           python3 build.py -p casskop-operator -m learn -d $IMAGE_NAMESPACE
 
 
