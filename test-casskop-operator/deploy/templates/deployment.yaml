@@ -40,6 +40,9 @@ spec:
         imagePullPolicy: "{{ .Values.image.pullPolicy }}"
         command:
         - casskop
+        envFrom:
+          - configMapRef:
+              name: sonar-testing-global-config
         # readinessProbe:
         #   exec:
         #     command:
