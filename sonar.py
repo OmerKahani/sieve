@@ -58,23 +58,29 @@ def setup_cluster(project, mode, test_script, test_config, log_dir, docker_repo,
     while True:
         created = core_v1.list_namespaced_pod(
             "kube-system", watch=False, label_selector="component=kube-apiserver").items
-        print("created kube-apiserver: ", created)
         if len(created) == len(apiserver_list) and len(created) == len([item for item in created if item.status.phase == "Running"]):
             break
         time.sleep(1)
     
-    print("All kube-apiservers are successfully created")
-
     for apiserver in apiserver_list:
         os.system("kubectl cp %s %s:/sonar.yaml -n kube-system" %
                   (test_config, apiserver))
 
+    # Preload operator image to kind nodes
+    image = "%s/%s:%s" %(docker_repo, project, docker_tag)
+    kind_load_cmd = "kind load docker-image %s" %(image)
+    print("we are loading image %s to kind nodes..." %(image))
+    if os.system(kind_load_cmd):
+        print("cannot load image %s locally, try to pull from remote"%(image))
+        os.system("docker pull %s" %(image))
+        os.system(kind_load_cmd)
+    
     controllers.deploy[project](docker_repo, docker_tag)
 
     # Wait for project pod ready
     w = kubernetes.watch.Watch()
     for event in w.stream(core_v1.list_namespaced_pod, namespace="default", label_selector="sonartag="+project):
-        print("we get event for operator pod: ", event)
+        print(event)
         if event['object'].status.phase == "Running":
             w.stop()
 
