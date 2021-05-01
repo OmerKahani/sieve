@@ -80,11 +80,8 @@ def setup_cluster(project, mode, test_script, test_config, log_dir, docker_repo,
     # Wait for project pod ready
     w = kubernetes.watch.Watch()
     for event in w.stream(core_v1.list_namespaced_pod, namespace="default", label_selector="sonartag="+project):
-        print(event)
         if event['object'].status.phase == "Running":
             w.stop()
-
-    print("Operator pod is ready")
 
     api1_addr = "https://" + core_v1.list_node(
         watch=False, label_selector="kubernetes.io/hostname=kind-control-plane").items[0].status.addresses[0].address + ":6443"
