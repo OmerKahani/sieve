@@ -20,11 +20,11 @@ straggler = "kind-control-plane3"
 testing_modes = ["time-travel", "sparse-read"]
 
 github_link = {
-    "cassandra-operator": "git@github.com:instaclustr/cassandra-operator.git",
-    "zookeeper-operator": "git@github.com:pravega/zookeeper-operator.git",
-    "rabbitmq-operator": "git@github.com:rabbitmq/cluster-operator.git",
-    "mongodb-operator": "git@github.com:percona/percona-server-mongodb-operator.git",
-    "cass-operator": "git@github.com:datastax/cass-operator.git",
+    "cassandra-operator": "https://github.com/instaclustr/cassandra-operator.git",
+    "zookeeper-operator": "https://github.com/pravega/zookeeper-operator.git",
+    "rabbitmq-operator": "https://github.com/rabbitmq/cluster-operator.git",
+    "mongodb-operator": "https://github.com/percona/percona-server-mongodb-operator.git",
+    "cass-operator": "https://github.com/datastax/cass-operator.git",
     "casskop-operator": "https://github.com/Orange-OpenSource/casskop.git",
 }
 
