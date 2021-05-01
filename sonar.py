@@ -61,7 +61,7 @@ def setup_cluster(project, mode, test_script, test_config, log_dir, docker_repo,
         if len(created) == len(apiserver_list) and len(created) == len([item for item in created if item.status.phase == "Running"]):
             break
         time.sleep(1)
-    
+
     for apiserver in apiserver_list:
         os.system("kubectl cp %s %s:/sonar.yaml -n kube-system" %
                   (test_config, apiserver))
