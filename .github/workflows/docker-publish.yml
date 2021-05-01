@@ -28,27 +28,27 @@ jobs:
           pip install kubernetes
           pip install pyyaml
       - name: Install Kind
-          run: |
-            go get sigs.k8s.io/kind
-            kind
-        - name: Install Helm
-          run: |
-            curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-            helm 
-        - name: Build Image
-          run: |
-            python3 build.py -p casskop-operator -m learn -d $IMAGE_NAMESPACE
-            python3 build.py -p casskop-operator -m time-travel  -d $IMAGE_NAMESPACE
-        - name: Sonar Learn
-          run: |
-            python3 sonar.py -p casskop-operator -t test1 -m learn -d $IMAGE_NAMESPACE
-        - name: Sonar Time Travel
-          run: |
-            python3 sonar.py -p casskop-operator -t test1 -d $IMAGE_NAMESPACE
-        - uses: actions/upload-artifact@v2
-          with:
-            name: sonar-casskop-artifact
-            path: log
+        run: |
+          go get sigs.k8s.io/kind
+          kind
+      - name: Install Helm
+        run: |
+          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+          helm 
+      - name: Build Image
+        run: |
+          python3 build.py -p casskop-operator -m learn -d $IMAGE_NAMESPACE
+          python3 build.py -p casskop-operator -m time-travel  -d $IMAGE_NAMESPACE
+      - name: Sonar Learn
+        run: |
+          python3 sonar.py -p casskop-operator -t test1 -m learn -d $IMAGE_NAMESPACE
+      - name: Sonar Time Travel
+        run: |
+          python3 sonar.py -p casskop-operator -t test1 -d $IMAGE_NAMESPACE
+      - uses: actions/upload-artifact@v2
+        with:
+          name: sonar-casskop-artifact
+          path: log
   mongodb-operator:
     runs-on: ubuntu-latest
     env:
@@ -71,31 +71,31 @@ jobs:
           pip install kubernetes
           pip install pyyaml
       - name: Install Kind
-          run: |
-            go get sigs.k8s.io/kind
-            kind
-        - name: Install Helm
-          run: |
-            curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-            helm 
-        - name: Build Image
-          run: |
-            python3 build.py -p mongodb-operator -m learn -d $IMAGE_NAMESPACE
-            python3 build.py -p mongodb-operator -m time-travel  -d $IMAGE_NAMESPACE
-        - name: Sonar Learn
-          run: |
-            python3 sonar.py -p mongodb-operator -t test1 -m learn -d $IMAGE_NAMESPACE
-            python3 sonar.py -p mongodb-operator -t test2 -m learn -d $IMAGE_NAMESPACE
-            python3 sonar.py -p mongodb-operator -t test3 -m learn -d $IMAGE_NAMESPACE
-        - name: Sonar Time Travel
-          run: |
-            python3 sonar.py -p mongodb-operator -t test1 -d $IMAGE_NAMESPACE
-            python3 sonar.py -p mongodb-operator -t test2 -d $IMAGE_NAMESPACE
-            python3 sonar.py -p mongodb-operator -t test3 -d $IMAGE_NAMESPACE
-        - uses: actions/upload-artifact@v2
-          with:
-            name: sonar-mongodb-artifact
-            path: log
+        run: |
+          go get sigs.k8s.io/kind
+          kind
+      - name: Install Helm
+        run: |
+          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+          helm 
+      - name: Build Image
+        run: |
+          python3 build.py -p mongodb-operator -m learn -d $IMAGE_NAMESPACE
+          python3 build.py -p mongodb-operator -m time-travel  -d $IMAGE_NAMESPACE
+      - name: Sonar Learn
+        run: |
+          python3 sonar.py -p mongodb-operator -t test1 -m learn -d $IMAGE_NAMESPACE
+          python3 sonar.py -p mongodb-operator -t test2 -m learn -d $IMAGE_NAMESPACE
+          python3 sonar.py -p mongodb-operator -t test3 -m learn -d $IMAGE_NAMESPACE
+      - name: Sonar Time Travel
+        run: |
+          python3 sonar.py -p mongodb-operator -t test1 -d $IMAGE_NAMESPACE
+          python3 sonar.py -p mongodb-operator -t test2 -d $IMAGE_NAMESPACE
+          python3 sonar.py -p mongodb-operator -t test3 -d $IMAGE_NAMESPACE
+      - uses: actions/upload-artifact@v2
+        with:
+          name: sonar-mongodb-artifact
+          path: log
   cassandra-operator:
     runs-on: ubuntu-latest
     env:
@@ -118,31 +118,31 @@ jobs:
           pip install kubernetes
           pip install pyyaml
       - name: Install Kind
-          run: |
-            go get sigs.k8s.io/kind
-            kind
-        - name: Install Helm
-          run: |
-            curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-            helm 
-        - name: Build Image
-          run: |
-            python3 build.py -p cassandra-operator -m learn -d $IMAGE_NAMESPACE
-            python3 build.py -p cassandra-operator -m time-travel  -d $IMAGE_NAMESPACE
-        - name: Sonar Learn
-          run: |
-            python3 sonar.py -p cassandra-operator -t test1 -m learn -d $IMAGE_NAMESPACE
-            python3 sonar.py -p cassandra-operator -t test2 -m learn -d $IMAGE_NAMESPACE
-            python3 sonar.py -p cassandra-operator -t test4 -m learn -d $IMAGE_NAMESPACE
-        - name: Sonar Time Travel
-          run: |
-            python3 sonar.py -p cassandra-operator -t test1 -d $IMAGE_NAMESPACE
-            python3 sonar.py -p cassandra-operator -t test2 -d $IMAGE_NAMESPACE
-            python3 sonar.py -p cassandra-operator -t test4 -d $IMAGE_NAMESPACE
-        - uses: actions/upload-artifact@v2
-          with:
-            name: sonar-cassandra-artifact
-            path: log
+        run: |
+          go get sigs.k8s.io/kind
+          kind
+      - name: Install Helm
+        run: |
+          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+          helm 
+      - name: Build Image
+        run: |
+          python3 build.py -p cassandra-operator -m learn -d $IMAGE_NAMESPACE
+          python3 build.py -p cassandra-operator -m time-travel  -d $IMAGE_NAMESPACE
+      - name: Sonar Learn
+        run: |
+          python3 sonar.py -p cassandra-operator -t test1 -m learn -d $IMAGE_NAMESPACE
+          python3 sonar.py -p cassandra-operator -t test2 -m learn -d $IMAGE_NAMESPACE
+          python3 sonar.py -p cassandra-operator -t test4 -m learn -d $IMAGE_NAMESPACE
+      - name: Sonar Time Travel
+        run: |
+          python3 sonar.py -p cassandra-operator -t test1 -d $IMAGE_NAMESPACE
+          python3 sonar.py -p cassandra-operator -t test2 -d $IMAGE_NAMESPACE
+          python3 sonar.py -p cassandra-operator -t test4 -d $IMAGE_NAMESPACE
+      - uses: actions/upload-artifact@v2
+        with:
+          name: sonar-cassandra-artifact
+          path: log
   rabbitmq-operator:
     runs-on: ubuntu-latest
     env:
@@ -165,27 +165,27 @@ jobs:
           pip install kubernetes
           pip install pyyaml
       - name: Install Kind
-          run: |
-            go get sigs.k8s.io/kind
-            kind
-        - name: Install Helm
-          run: |
-            curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-            helm 
-        - name: Build Image
-          run: |
-            python3 build.py -p rabbitmq-operator -m learn -d $IMAGE_NAMESPACE
-            python3 build.py -p rabbitmq-operator -m time-travel  -d $IMAGE_NAMESPACE
-        - name: Sonar Learn
-          run: |
-            python3 sonar.py -p rabbitmq-operator -t test2 -m learn -d $IMAGE_NAMESPACE
-        - name: Sonar Time Travel
-          run: |
-            python3 sonar.py -p rabbitmq-operator -t test2 -d $IMAGE_NAMESPACE
-        - uses: actions/upload-artifact@v2
-          with:
-            name: sonar-rabbitmq-artifact
-            path: log
+        run: |
+          go get sigs.k8s.io/kind
+          kind
+      - name: Install Helm
+        run: |
+          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+          helm 
+      - name: Build Image
+        run: |
+          python3 build.py -p rabbitmq-operator -m learn -d $IMAGE_NAMESPACE
+          python3 build.py -p rabbitmq-operator -m time-travel  -d $IMAGE_NAMESPACE
+      - name: Sonar Learn
+        run: |
+          python3 sonar.py -p rabbitmq-operator -t test2 -m learn -d $IMAGE_NAMESPACE
+      - name: Sonar Time Travel
+        run: |
+          python3 sonar.py -p rabbitmq-operator -t test2 -d $IMAGE_NAMESPACE
+      - uses: actions/upload-artifact@v2
+        with:
+          name: sonar-rabbitmq-artifact
+          path: log
   zookeeper-operator:
     runs-on: ubuntu-latest
     env:
@@ -208,26 +208,26 @@ jobs:
           pip install kubernetes
           pip install pyyaml
       - name: Install Kind
-          run: |
-            go get sigs.k8s.io/kind
-            kind
-        - name: Install Helm
-          run: |
-            curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-            helm 
-        - name: Build Image
-          run: |
-            python3 build.py -p zookeeper-operator -m learn -d $IMAGE_NAMESPACE
-            python3 build.py -p zookeeper-operator -m time-travel  -d $IMAGE_NAMESPACE
-        - name: Sonar Learn
-          run: |
-            python3 sonar.py -p zookeeper-operator -t test1 -m learn -d $IMAGE_NAMESPACE
-            python3 sonar.py -p zookeeper-operator -t test2 -m learn -d $IMAGE_NAMESPACE
-        - name: Sonar Time Travel
-          run: |
-            python3 sonar.py -p zookeeper-operator -t test1 -d $IMAGE_NAMESPACE
-            python3 sonar.py -p zookeeper-operator -t test2 -d $IMAGE_NAMESPACE
-        - uses: actions/upload-artifact@v2
-          with:
-            name: sonar-zookeeper-artifact
-            path: log
+        run: |
+          go get sigs.k8s.io/kind
+          kind
+      - name: Install Helm
+        run: |
+          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+          helm 
+      - name: Build Image
+        run: |
+          python3 build.py -p zookeeper-operator -m learn -d $IMAGE_NAMESPACE
+          python3 build.py -p zookeeper-operator -m time-travel  -d $IMAGE_NAMESPACE
+      - name: Sonar Learn
+        run: |
+          python3 sonar.py -p zookeeper-operator -t test1 -m learn -d $IMAGE_NAMESPACE
+          python3 sonar.py -p zookeeper-operator -t test2 -m learn -d $IMAGE_NAMESPACE
+      - name: Sonar Time Travel
+        run: |
+          python3 sonar.py -p zookeeper-operator -t test1 -d $IMAGE_NAMESPACE
+          python3 sonar.py -p zookeeper-operator -t test2 -d $IMAGE_NAMESPACE
+      - uses: actions/upload-artifact@v2
+        with:
+          name: sonar-zookeeper-artifact
+          path: log
