@@ -13,6 +13,10 @@ jobs:
       KUBECONFIG: /home/runner/.kube/config
     steps:
       - uses: actions/checkout@v2
+      - name: Setup Git
+        run: |
+          git config --global user.name "sonar"
+          git config --global user.email "sonar@sonar.com"
       - name: Setup Go environment
         uses: actions/setup-go@v2.1.3
         with:
@@ -56,6 +60,10 @@ jobs:
       KUBECONFIG: /home/runner/.kube/config
     steps:
       - uses: actions/checkout@v2
+      - name: Setup Git
+        run: |
+          git config --global user.name "sonar"
+          git config --global user.email "sonar@sonar.com"
       - name: Setup Go environment
         uses: actions/setup-go@v2.1.3
         with:
@@ -103,6 +111,10 @@ jobs:
       KUBECONFIG: /home/runner/.kube/config
     steps:
       - uses: actions/checkout@v2
+      - name: Setup Git
+        run: |
+          git config --global user.name "sonar"
+          git config --global user.email "sonar@sonar.com"
       - name: Setup Go environment
         uses: actions/setup-go@v2.1.3
         with:
@@ -150,6 +162,10 @@ jobs:
       KUBECONFIG: /home/runner/.kube/config
     steps:
       - uses: actions/checkout@v2
+      - name: Setup Git
+        run: |
+          git config --global user.name "sonar"
+          git config --global user.email "sonar@sonar.com"
       - name: Setup Go environment
         uses: actions/setup-go@v2.1.3
         with:
@@ -193,6 +209,10 @@ jobs:
       KUBECONFIG: /home/runner/.kube/config
     steps:
       - uses: actions/checkout@v2
+      - name: Setup Git
+        run: |
+          git config --global user.name "sonar"
+          git config --global user.email "sonar@sonar.com"
       - name: Setup Go environment
         uses: actions/setup-go@v2.1.3
         with:
