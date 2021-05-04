@@ -28,7 +28,7 @@ In general, Sonar performs failure testing by pausing the apiserver and restarti
 
 **Test workloads are required.** Sonar doesn't generate test workloads to run. Sonar can reuse any existing e2e test workload that doesn't perform cluster set up (Sonar will set up the cluster for testing). We also wrote some simple workloads for Sonar.
 
-### Testing the controller with time travel config
+### Testing the controller using Sonar
 Now, let's test the rabbitmq-operator
 ```
 python3 sonar.py -p rabbitmq-operator -t recreate-rabbitmq-cluster -c log/rabbitmq-operator/recreate-rabbitmq-cluster/learn/generated-config/time-travel-config-1.yaml
@@ -41,7 +41,7 @@ The workload simply does three things:
 2. it deletes the rabbitmq cluster `kubectl delete RabbitmqCluster rabbitmq-cluster`
 3. it recreates the rabbitmq cluster `kubectl apply -f rmqc-1.yaml`
 
-`-c log/rabbitmq-operator/recreate-rabbitmq-cluster/learn/generated-config/time-travel-config-1.yaml` is a configuration file which guides the failure testing (for example, the schedule for restarting controllers or lagging apiservers). Triggering a time-travel bug requires injecting pause/restart with particular timing. The time-travel configuration file encodes the particular timing so no manual intervention is required during testing.
+`-c log/rabbitmq-operator/recreate-rabbitmq-cluster/learn/generated-config/time-travel-config-1.yaml` is a configuration file that guides the failure testing. Triggering a time-travel bug requires lagging apiservers/restarting controllers with particular timing. The time-travel configuration file encodes the particular timing so no manual intervention is required during testing.
 
 By typing the above command, Sonar will:
 1. run the `recreate-rabbitmq-cluster` workload against the kind kubernetes cluster;

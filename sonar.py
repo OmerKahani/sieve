@@ -169,7 +169,8 @@ def run(test_suites, project, test, log_dir, mode, config, docker, run="all"):
         test_config = config if config != "none" else suite.config
         test_mode = mode if mode != "none" else suite.mode
         assert test_mode in controllers.testing_modes, "wrong mode option"
-        print("testing mode: %s config: %s" % (test_mode, test_config))
+        print("testing mode: %s" % test_mode)
+        print("testing config: %s" % test_config)
         log_dir = os.path.join(log_dir, test_mode)
         run_test(project, test_mode, suite.workload,
                  test_config, log_dir, docker, test_mode, suite.cluster_config, data_dir, suite.double_sides, run)
