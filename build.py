@@ -50,7 +50,7 @@ def setup_kubernetes(mode, img_repo, img_tag):
 
 def download_controller(project, link, sha):
     # If for some permission issue that we can't remove the operator, try sudo
-    if os.system("rm -rf %s" % controllers.app_dir[project]):
+    if os.WEXITSTATUS(os.system("rm -rf %s" % controllers.app_dir[project])):
         print("We cannot remove %s, try sudo instead" % controllers.app_dir[project])
         os.system("sudo rm -rf %s" % controllers.app_dir[project])
     os.system("git clone %s %s >> /dev/null" %

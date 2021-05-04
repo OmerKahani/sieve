@@ -70,7 +70,7 @@ def setup_cluster(project, mode, test_script, test_config, log_dir, docker_repo,
     image = "%s/%s:%s" %(docker_repo, project, docker_tag)
     kind_load_cmd = "kind load docker-image %s" %(image)
     print("we are loading image %s to kind nodes..." %(image))
-    if os.system(kind_load_cmd):
+    if os.WEXITSTATUS(os.system(kind_load_cmd)):
         print("cannot load image %s locally, try to pull from remote"%(image))
         os.system("docker pull %s" %(image))
         os.system(kind_load_cmd)
