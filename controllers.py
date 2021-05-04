@@ -2,15 +2,17 @@ import os
 import kubernetes
 import time
 import re
+import workloads
+import test_framework
 
 
 class Suite:
-    def __init__(self, workload, config, mode, double_sides=False, cluster_config="kind-ha.yaml"):
+    def __init__(self, workload, config, mode, double_sides=False, num_workers=2):
         self.workload = workload
         self.config = config
         self.mode = mode
         self.double_sides = double_sides
-        self.cluster_config = cluster_config
+        self.num_workers = num_workers
 
 
 docker_repo = "xudongs"
@@ -46,34 +48,43 @@ test_dir = {
     "casskop-operator": "test-casskop-operator",
 }
 
+test_dir_test = {
+    "cassandra-operator": os.path.join(test_dir["cassandra-operator"], "test"),
+    "zookeeper-operator": os.path.join(test_dir["zookeeper-operator"], "test"),
+    "rabbitmq-operator": os.path.join(test_dir["rabbitmq-operator"], "test"),
+    "mongodb-operator": os.path.join(test_dir["mongodb-operator"], "test"),
+    "cass-operator": os.path.join(test_dir["cass-operator"], "test"),
+    "casskop-operator": os.path.join(test_dir["casskop-operator"], "test"),
+}
+
 test_suites = {
     "cassandra-operator": {
-        "test1": Suite(
-            "scaleDownCassandraDataCenter.sh", "test-cassandra-operator/test/sparse-read-1.yaml", "sparse-read"),
-        "test2": Suite(
-            "recreateCassandraDataCenter.sh", "test-cassandra-operator/test/time-travel-1.yaml", "time-travel"),
-        "test4": Suite(
-            "scaleDownUpCassandraDataCenter.sh", "test-cassandra-operator/test/time-travel-2.yaml", "time-travel"),
+        "scaledown": Suite(
+            test_framework.ExtendedWorkload(test_dir_test["cassandra-operator"], "./scaleDownCassandraDataCenter.sh", True), "test-cassandra-operator/test/sparse-read-1.yaml", "sparse-read"),
+        "recreate": Suite(
+            workloads.workloads["cassandra-operator"]["recreate"], "test-cassandra-operator/test/time-travel-1.yaml", "time-travel"),
+        "scaledown-scaleup": Suite(
+            workloads.workloads["cassandra-operator"]["scaledown-scaleup"], "test-cassandra-operator/test/time-travel-2.yaml", "time-travel"),
     },
     "zookeeper-operator": {
-        "test1": Suite(
-            "recreateZookeeperCluster.sh", "test-zookeeper-operator/test/time-travel-1.yaml", "time-travel"),
-        "test2": Suite(
-            "scaleDownUpZookeeperCluster.sh", "test-zookeeper-operator/test/time-travel-2.yaml", "time-travel"),
+        "recreate": Suite(
+            workloads.workloads["zookeeper-operator"]["recreate"], "test-zookeeper-operator/test/time-travel-1.yaml", "time-travel"),
+        "scaledown-scaleup": Suite(
+            workloads.workloads["zookeeper-operator"]["scaledown-scaleup"], "test-zookeeper-operator/test/time-travel-2.yaml", "time-travel"),
     },
     "rabbitmq-operator": {
-        "recreate-rabbitmq-cluster": Suite(
-            "recreateRabbitmqCluster.sh", "test-rabbitmq-operator/test/time-travel-1.yaml", "time-travel"),
-        "test2": Suite(
-            "resizePVCRabbitmqCluster.sh", "test-rabbitmq-operator/test/time-travel-2.yaml", "time-travel", double_sides=True),
+        "recreate": Suite(
+            workloads.workloads["rabbitmq-operator"]["recreate"], "test-rabbitmq-operator/test/time-travel-1.yaml", "time-travel"),
+        "resize-pvc": Suite(
+            workloads.workloads["rabbitmq-operator"]["resize-pvc"], "test-rabbitmq-operator/test/time-travel-2.yaml", "time-travel", double_sides=True),
     },
     "mongodb-operator": {
-        "test1": Suite(
-            "recreateMongodbCluster.sh", "test-mongodb-operator/test/time-travel-1.yaml", "time-travel", cluster_config="kind-ha-4w.yaml"),
-        "test2": Suite(
-            "disableEnableShard.sh", "test-mongodb-operator/test/time-travel-2.yaml", "time-travel", cluster_config="kind-ha-4w.yaml"),
-        "test3": Suite(
-            "disableEnableArbiter.sh", "test-mongodb-operator/test/time-travel-3.yaml", "time-travel", cluster_config="kind-ha-4w.yaml"),
+        "recreate": Suite(
+            workloads.workloads["mongodb-operator"]["recreate"], "test-mongodb-operator/test/time-travel-1.yaml", "time-travel", num_workers=3),
+        "disable-enable-shard": Suite(
+            workloads.workloads["mongodb-operator"]["disable-enable-shard"], "test-mongodb-operator/test/time-travel-2.yaml", "time-travel", num_workers=3),
+        "disable-enable-arbiter": Suite(
+            workloads.workloads["mongodb-operator"]["disable-enable-arbiter"], "test-mongodb-operator/test/time-travel-3.yaml", "time-travel", num_workers=5),
     },
     "cass-operator": {
         "test1": Suite(
