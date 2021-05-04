@@ -171,5 +171,6 @@ def compare_digest(learning_side_effect, learning_status, testing_side_effect, t
                 testing_config)
             bug_report += "[DEBUGGING SUGGESTION] %s\n" % generate_debug_suggestion(
                 testing_config)
-    print(bug_report)
+        bug_report = "\n[BUG REPORT]\n" + bug_report
+        print(bug_report)
     return bug_report
