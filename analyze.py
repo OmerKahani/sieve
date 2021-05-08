@@ -237,6 +237,10 @@ def passes_as_sql_query():
         query += " where " if first_optional_pass else " and "
         query += common.SQL_DELETE_ONLY_FILTER
         first_optional_pass = False
+    if common.DELETE_AND_CREATE_FILTER_FLAG:
+        query += " where " if first_optional_pass else " and "
+        query += common.SQL_DELETE_CREATE_FILTER
+        first_optional_pass = False
     if common.ERROR_MSG_FILTER_FLAG:
         query += " where " if first_optional_pass else " and "
         query += common.SQL_ERROR_MSG_FILTER
