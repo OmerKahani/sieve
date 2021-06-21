@@ -172,7 +172,7 @@ sha = {
     "mongodb-operator": "c12b69e2c41efc67336a890039394250420f60bb",
     "cass-operator": "dbd4f7a10533bb2298aed0d40ea20bfd8c133da2",
     "casskop-operator": "f87c8e05c1a2896732fc5f3a174f1eb99e936907",
-    "xtradb-operator": "29092c9b145af6eaf5cbff534287483bec4167b6",
+    "xtradb-operator": "f4afcd83ce81530d42ed87f10ac640ac1908e7b2"
 }
 
 docker_file = {

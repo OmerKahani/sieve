@@ -13,6 +13,7 @@ fi
 docker build \
     --build-arg GIT_COMMIT=$GIT_COMMIT \
     --build-arg GIT_BRANCH=$GIT_BRANCH \
+    --build-arg BUILD_TIME=$BUILD_TIME \
     --build-arg GO_LDFLAGS="$GO_LDFLAGS" \
     --no-cache \
     -t "${dockerrepo}/xtradb-operator:${dockertag}" -f build/Dockerfile .

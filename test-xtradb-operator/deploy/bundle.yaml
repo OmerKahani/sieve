@@ -14,8 +14,38 @@ spec:
     - pxcs
   scope: Namespaced
   versions:
+    - name: v1
+      storage: false
+      served: true
+    - name: v1-1-0
+      storage: false
+      served: true
+    - name: v1-2-0
+      storage: false
+      served: true
+    - name: v1-3-0
+      storage: false
+      served: true
+    - name: v1-4-0
+      storage: false
+      served: true
+    - name: v1-5-0
+      storage: false
+      served: true
+    - name: v1-6-0
+      storage: false
+      served: true
     - name: v1-7-0
+      storage: false
+      served: true
+    - name: v1-8-0
+      storage: false
+      served: true
+    - name: v1-9-0
       storage: true
+      served: true
+    - name: v1alpha1
+      storage: false
       served: true
   additionalPrinterColumns:
     - name: Endpoint
@@ -41,6 +71,10 @@ spec:
       JSONPath: .metadata.creationTimestamp
   subresources:
     status: {}
+    scale:
+      specReplicasPath: .spec.pxc.size
+      statusReplicasPath: .status.pxc.ready
+      labelSelectorPath: .status.pxc.labelSelectorPath
 ---
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition

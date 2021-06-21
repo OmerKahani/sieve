@@ -1,4 +1,4 @@
-apiVersion: pxc.percona.com/v1-7-0
+apiVersion: pxc.percona.com/v1-9-0
 kind: PerconaXtraDBCluster
 metadata:
   name: sonar-xtradb-cluster
@@ -7,7 +7,7 @@ metadata:
     - delete-proxysql-pvc
     - delete-pxc-pvc
 spec:
-  crVersion: 1.7.0
+  crVersion: 1.9.0
   secretsName: sonar-cluster-secrets
   vaultSecretName: keyring-secret-vault
   sslSecretName: sonar-cluster-ssl
@@ -40,7 +40,7 @@ spec:
   haproxy:
     enabled: false
     size: 3
-    image: percona/percona-xtradb-cluster-operator:1.7.0-haproxy
+    image: percona/percona-xtradb-cluster-operator:1.8.0-haproxy
     resources:
       requests:
         memory: 1G
@@ -53,7 +53,7 @@ spec:
   proxysql:
     enabled: false
     size: 3
-    image: percona/percona-xtradb-cluster-operator:1.7.0-proxysql
+    image: percona/percona-xtradb-cluster-operator:1.8.0-proxysql
     resources:
       requests:
         memory: 1G
@@ -70,7 +70,7 @@ spec:
     gracePeriod: 30
   logcollector:
     enabled: false
-    image: percona/percona-xtradb-cluster-operator:1.7.0-logcollector
+    image: percona/percona-xtradb-cluster-operator:1.8.0-logcollector
   pmm:
     enabled: false
     image: percona/pmm-client:2.12.0
